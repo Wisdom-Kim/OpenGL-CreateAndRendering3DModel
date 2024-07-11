@@ -1,15 +1,24 @@
+OpenGL을 이용한 간단한 3d모델 생성 및 렌더링 프로그램입니다.
+
 ## 이용방법
+* SOR의 소스코드를 먼저 실행하여 메쉬를 생성하여 SaveModel을 한 후,
+* 이후 프로그램 정지 후, SOR을 주석 처리 한 뒤 showModel의 소스코드를 실행해주세요.
+
+## Getting Strated
 초기세팅방법 적어야함...(freeGLUT세팅 등..)
 
+
 # SOR.cpp
-### 1.
+마우스를 통해 점을 찍고, 회전축을 통해 원하는 각도 주기로 점을 회전시켜 배열에 저장합니다.<br>
+이 때 저장된 점을 이어 메쉬로 만들고, 3d모델 파일 객체(.dat)로 저장할 수 있습니다.
+* ### 1. 마우스 왼쪽 버튼을 통해 점을 찍을 수 있습니다.
 ![image](https://github.com/Wisdom-Kim/WebGL-CreateAndRendering3DModel/assets/52325199/1ebb295a-29ce-4d07-b136-d2f0d45fe458)
-### 2. 1번에서 찍은 점들을 회전축, 회전각을 정의하여 여러 점을 만들 수 있습니다.
+* ### 2. 1번에서 찍은 점들을 회전축, 회전각을 정의하여 여러 점을 만들 수 있습니다.
 ![image](https://github.com/Wisdom-Kim/WebGL-CreateAndRendering3DModel/assets/52325199/8f4f3520-cf9e-4838-bab1-6d62028094d9)
 ![image](https://github.com/Wisdom-Kim/WebGL-CreateAndRendering3DModel/assets/52325199/7a331333-04d0-4130-9291-8232e79e4d94)
-### 3. 마우스 오른쪽 - CreateMesh를 선택을 선택하면, 생성된 점을 바탕으로 메쉬를 생성합니다.
+* ### 3. 마우스 오른쪽 - CreateMesh를 선택을 선택하면, 생성된 점을 바탕으로 메쉬를 생성합니다.
 ![image](https://github.com/Wisdom-Kim/WebGL-CreateAndRendering3DModel/assets/52325199/35ee1380-508f-4e70-b869-50e2ce5d3ccc)
-### 4. SaveModel을 선택하면 3에서 생성된 Mesh를 기반으로 3D 모델을 생성합니다.
+* ### 4. SaveModel을 선택하면 3에서 생성된 Mesh를 기반으로 3D 모델을 생성합니다.
 
 # showModel.cpp
 ### 1. SOR.cpp가 생성한 customModel.dat을 불러와 보여줍니다.
