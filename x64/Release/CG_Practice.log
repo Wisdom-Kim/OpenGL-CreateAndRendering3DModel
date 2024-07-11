@@ -1,0 +1,2 @@
+﻿  practice02.cpp
+C:\Projects\CG_Practice\CG_Practice\practice02.cpp(5,10): fatal error C1083: 포함 파일을 열 수 없습니다. 'GL/glut.h': No such file or directory
