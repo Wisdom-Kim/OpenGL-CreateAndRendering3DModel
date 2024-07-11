@@ -34,7 +34,7 @@ float s_factor = 1.0; // 스케일의 값
 int scale = 0;
 int status = 0; //WIRE or SHADE or SMOOTH
 int Cull = 0; //CULLING toggle 
-string fname = "./mysphere.dat"; //로딩 되는 기본 도형 Sphere
+string fname = "./customModel.dat"; //SOR을 통해 생성된 3Dmodel
 
 void InitLight() { //Light
 	GLfloat mat_diffuse[] = { 0.5, 0.4, 0.3, 1.0 }; //재질
@@ -73,7 +73,7 @@ Point cnormal(Point a, Point b, Point c) {
 	return r;
 }
 
-void ReadModel() //mysphere.dat 읽는 코드
+void ReadModel() //customModel.dat 읽는 코드
 {
 	FILE* f1; char s[81]; int i;
 

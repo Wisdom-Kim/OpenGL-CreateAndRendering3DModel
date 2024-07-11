@@ -44,9 +44,9 @@ GLfloat xLocation, yLocation, zLocation = 0; // location
 GLfloat vx, vy, vz = 0; // 시점 종점 (view)
 GLfloat cy = 1.0;
 GLfloat angle_x = 0;
-GLfloat angle_y = 0; 
+GLfloat angle_y = 0;
 int moving; int mousebegin; int light_moving; float scalefactor = 1.0; int scaling = 0; int status = 0;
-string fname = ".\\mymodel.dat";
+string fname = ".\\customModel.dat";
 
 
 static xPoint3D pt;
@@ -94,7 +94,7 @@ Point cnormal(Point a, Point b, Point c) {
     return r;
 }
 
-//mymodel의 메쉬와 폴리곤을 생성하기 위해 새로운 배열에 dat파일로부터 값을 입력받음
+//3dmodel의 메쉬와 폴리곤을 생성하기 위해 새로운 배열에 dat파일로부터 값을 입력받음
 void ReadModel() {
     FILE* f1;      char s[81];         int i;
     if (mpoint != NULL) delete mpoint;
@@ -165,7 +165,7 @@ void DrawShade(void)
     glutSwapBuffers();
 }
 //입력받은 배열로 실제 모델 그리기
-void MakeGL_Model(void) //myModel 오브젝트 만들기
+void MakeGL_Model(void) //3dModel 오브젝트 만들기
 {
     int i;
     glShadeModel(GL_SMOOTH);
@@ -353,10 +353,10 @@ void SaveModel(vector <xPoint3D> pts)
     int pnum = arInputPoints.size() + arRotPoints.size(); //점들의 총 개수
     int m = arRotPoints.size(); //회전된 점들 개수
 
-//    char directory= "C:\\Users\\wisdom99\\Downloads\\Computer Graphics\\mymodel.dat";
+//    char directory= "C:\\Users\\wisdom99\\Downloads\\Computer Graphics\\customModel.dat";
 
     FILE* fout;
-    fout = fopen(".\\mymodel.dat", "w");
+    fout = fopen(".\\customModel.dat", "w");
 
     fprintf(fout, "VERTEX = %d\n", pts.size());
     for (int i = 0; i < m; i++)
@@ -389,7 +389,7 @@ void SaveModel(vector <xPoint3D> pts)
 }
 
 void winReshapeFcn(int newWidth, int newHeight) {
-    glViewport(0, 0, newWidth, newHeight); 
+    glViewport(0, 0, newWidth, newHeight);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, GLdouble(newWidth), 0.0, GLdouble(newHeight));
@@ -404,93 +404,7 @@ void displayFcn(void) { // Clear display window.
     glLoadIdentity();
     glFlush();
 }
-//ShowModel에서 display함수
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glTranslatef(xLocation, yLocation, zLocation);
-    MakeGL_Model();
-    glFrontFace(GL_CCW); glEnable(GL_CULL_FACE);
-    if (status == WIRE)
-        DrawWire();
-    else if (status == SHADE)
-        DrawShade();
-    else if (status == 3)
-        glShadeModel(GL_SMOOTH);
-}
-//ShowModel에서 마우스와 키보드 함수
-void keyboard(unsigned char key, int x, int y) //keyboard 이벤트
-{
-    switch (key)
-    {
-    case 'w': //와이어 모드
-        status = 0;
-        glutPostRedisplay();
-        printf("WireFrame\n");
-        break;
-    case 'd': //셰이드 모드
-        status = 1;
-        MakeGL_Model();
-        glutPostRedisplay();
-        printf("Flat Shading\n");
-        break;
-    case 's': //스무스 모드
-        status = 2;
-        glShadeModel(GL_SMOOTH);
-        glutPostRedisplay();
-        printf("Smooth Shading\n");
-        break;
 
-    case '1': //평행 투사
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        xLocation = 0, yLocation = 0, zLocation = 0;
-        glOrtho(-150, 150, -150, 150, -800, 800);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(400.0, 400.0, 400.0, // eye position
-            0.0, 0.0, 0.0, // center is at (0,0,0)
-            0.0, 1.0, 0.); // up is in positive Y direction
-        glutPostRedisplay();
-        printf("평행 투사\n");
-        break;
-
-    case '2': //원근 투사
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        xLocation = 0, yLocation = 0, zLocation = 0;
-        gluPerspective(40.0, // field of view in degree
-            1.0, // aspect ratio
-            1.0, // Z near
-            2000.0); // Z far
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(400.0, 400.0, 400.0, // eye position
-            0.0, 0.0, 0.0, // center is at (0,0,0)
-            0.0, 1.0, 0.); // up is in positive Y direction
-        glutPostRedisplay();
-        printf("원근 투사\n");
-        break;
-
-    case '3': //정면
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        xLocation = 0, yLocation = 0, zLocation = 0;
-        gluPerspective(40.0, // field of view in degree
-            1.0, // aspect ratio
-            1.0, // Z near
-            2000.0); // Z far
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        gluLookAt(400.0, 0.0, 400.0, // eye position
-            0.0, 0.0, 0.0, // center is at (0,0,0)
-            0.0, 1.0, 0.); // up is in positive Y direction
-        glutPostRedisplay();
-        printf("시점 변환(front)\n");
-        break;
-
-    }
-}
 void KeyboardMove(int key, int x, int y) //keyboard 이벤트
 {
     switch (key)
@@ -628,23 +542,6 @@ void SOR_main()
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-//showMOdel에서의 main함수
-void ShowModel_main()
-{
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 100);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutCreateWindow("20204656 김지혜");
-    glutDisplayFunc(display);
-    glutMouseFunc(mouse);
-    glutKeyboardFunc(keyboard);
-    glutMotionFunc(motion);
-    glutSpecialFunc(KeyboardMove);
-    ReadModel();
-    GLSetupRC();
-    InitLight();
-
-}
 void Myhelp() //Mouse/Key Button Usage
 {
     printf("--------------------------------------------------\n");
@@ -662,7 +559,7 @@ void Myhelp() //Mouse/Key Button Usage
 void main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    ShowModel_main();
+    SOR_main();
     glutMainLoop();
 
 }
