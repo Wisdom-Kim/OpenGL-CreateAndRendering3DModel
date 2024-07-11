@@ -1,11 +1,26 @@
 OpenGL을 이용한 간단한 3d모델 생성 및 렌더링 프로그램입니다.
 
+## 실행환경
+```
+Visual Studio 2019
+```
 ## 이용방법
 * SOR의 소스코드를 먼저 실행하여 메쉬를 생성하여 SaveModel을 한 후,
 * 이후 프로그램 정지 후, SOR을 주석 처리 한 뒤 showModel의 소스코드를 실행해주세요.
 
 ## Getting Strated
-초기세팅방법 적어야함...(freeGLUT세팅 등..)
+![image](https://github.com/Wisdom-Kim/OpenGL-CreateAndRendering3DModel/assets/52325199/d35ba8d9-d0b2-4f46-8b00-be5e96cb4d00)
+1. 파일을 실행하기 전, **프로젝트>속성>일반** 에서 다음과 같이 설정해주세요.
+```
+추가라이브러리 디렉토리: (현재 레포에 올린 폴더)freeglut 내 include 경로
+```
+2. **프로젝트>속성>링커>모든옵션**에서 다음과 같이 설정해주세요.
+```
+추가라이브러리 디렉토리: freeglut 폴더 내 lib 경로
+추가종속성
+freeglut.lib
+%(AdditionalDependencies)
+```
 
 
 # SOR.cpp
